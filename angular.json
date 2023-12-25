@@ -99,6 +99,42 @@
           }
         }
       }
+    },
+    "assaf-prime-lib": {
+      "projectType": "library",
+      "root": "projects/assaf-prime-lib",
+      "sourceRoot": "projects/assaf-prime-lib/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/assaf-prime-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/assaf-prime-lib/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/assaf-prime-lib/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/assaf-prime-lib/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
     }
+  },
+  "cli": {
+    "analytics": "cfadb279-7ff1-4ef1-9430-719ed09545c2"
   }
 }
