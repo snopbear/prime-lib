@@ -1,0 +1,57 @@
+<ng-container [ngSwitch]="mode">
+  <!-- Default button -->
+  <p-button
+    [disabled]="disabled"
+    *ngSwitchDefault
+    [label]="label"
+    icon="{{ btnIcon ? 'pi ' + btnIcon : '' }}"
+    [type]="btnType"
+    styleClass="p-button-{{ severity }} {{
+      isRounded ? 'p-button-rounded' : ''
+    }} {{ isText ? 'p-button-text' : '' }} {{
+      isRaised ? 'p-button-raised' : ''
+    }} {{ isOutline ? 'p-button-outlined' : '' }} p-button-{{ size }} {{
+      styleClass!
+    }} {{ isLink ? 'p-button-link' : '' }}"
+    [iconPos]="iconPos"
+  ></p-button>
+
+  <!-- Badge mode -->
+  <p-button
+    [disabled]="disabled"
+    *ngSwitchCase="'badge'"
+    [label]="label"
+    icon="{{ btnIcon ? 'pi ' + btnIcon : '' }}"
+    [type]="btnType"
+    [iconPos]="iconPos"
+    styleClass="p-button-{{ severity }} {{
+      isRounded ? 'p-button-rounded' : ''
+    }} {{ isText ? 'p-button-text' : '' }} {{
+      isRaised ? 'p-button-raised' : ''
+    }} {{ isOutline ? 'p-button-outlined' : '' }} p-button-{{ size }}"
+    badgeClass="p-badge-{{ badgeSeverity }} {{ styleClass! }}"
+    [badge]="badgeValue"
+  ></p-button>
+
+  <!-- Button set mode -->
+  <span class="p-buttonset" *ngSwitchCase="'set'">
+    <ng-content select="assaf-button"></ng-content>
+  </span>
+
+  <!-- Custom button content mode -->
+  <p-button
+    [disabled]="disabled"
+    *ngSwitchCase="'template'"
+    [type]="btnType"
+    styleClass="p-button-{{ severity }} {{
+      isRounded ? 'p-button-rounded' : ''
+    }} {{ isText ? 'p-button-text' : '' }} {{
+      isRaised ? 'p-button-raised' : ''
+    }} {{ isOutline ? 'p-button-outlined' : '' }} p-button-{{ size }} {{
+      styleClass!
+    }}"
+  >
+    <!-- Provide an ng-template tag with content attribute -->
+    <ng-content select="[content]"></ng-content>
+  </p-button>
+</ng-container>
