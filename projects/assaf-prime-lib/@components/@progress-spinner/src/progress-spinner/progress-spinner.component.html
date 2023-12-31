@@ -1,0 +1,14 @@
+<!-- Basic spinner -->
+<p-progressSpinner
+  *ngIf="!workWithInterceptor"
+  [styleClass]="styleClass!"
+  [strokeWidth]="strokeWidth"
+></p-progressSpinner>
+<!-- Spinner based on HTTP interceptor -->
+<div
+  class="spinner-intercept {{ containerStyleClass! }}"
+  *ngIf="workWithInterceptor && (loaderService.loaderStatus$ | async)"
+>
+  <p-progressSpinner [styleClass]="styleClass!" [strokeWidth]="strokeWidth">
+  </p-progressSpinner>
+</div>

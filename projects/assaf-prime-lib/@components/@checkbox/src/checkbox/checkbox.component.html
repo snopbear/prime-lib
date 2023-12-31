@@ -1,0 +1,37 @@
+<ng-template [ngIf]="_form" [ngIfElse]="elseBlock">
+  <!-- FormGroup mode -->
+  <ng-container [formGroup]="_form">
+    <p-checkbox
+      [label]="label"
+      [formControl]="control"
+      [value]="controlValue"
+      [styleClass]="styleClass"
+      [binary]="controlValue ? false : true"
+      [labelStyleClass]="labelStyleClass"
+    ></p-checkbox>
+  </ng-container>
+</ng-template>
+
+<!-- ngModel mode -->
+<ng-template #elseBlock>
+  <p-checkbox
+    [label]="label"
+    [(ngModel)]="value"
+    (ngModelChange)="onChange($event)"
+    [styleClass]="styleClass"
+    [labelStyleClass]="labelStyleClass"
+    [binary]="true"
+  ></p-checkbox>
+</ng-template>
+
+<!-- Formcontrol validations -->
+<ng-container
+  *ngIf="controlErrors && !control.valid && (control.touched || control.dirty)"
+>
+  <!-- https://github.com/angular/angular/issues/46867 -->
+  <ng-container *ngFor="let errorKey of _errorKeys">
+    <p *ngIf="control?.errors?.[errorKey]" class="error">
+      {{ controlErrors[errorKey] }}
+    </p></ng-container
+  >
+</ng-container>

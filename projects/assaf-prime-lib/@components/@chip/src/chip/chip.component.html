@@ -1,0 +1,12 @@
+<label *ngIf="title" class="{{ titleClass! }}">{{ title }}</label>
+<p-chip
+  [label]="label"
+  [styleClass]="styleClass"
+  icon="pi {{ chipIcon }}"
+  removeIcon="pi {{ removeIcon }}"
+  [image]="image"
+  [removable]="removable"
+  (onRemove)="chipRemoved($event)"
+>
+  <ng-content></ng-content>
+</p-chip>

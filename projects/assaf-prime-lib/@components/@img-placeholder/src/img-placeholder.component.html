@@ -1,0 +1,30 @@
+<!-- Placeholder img -->
+<img
+  [src]="placeholder"
+  alt="img-placeholder"
+  *ngIf="_showPlaceholder | async"
+  [width]="placeholderWidth"
+  [height]="placeholderHeight"
+/>
+
+<!-- Normal img load -->
+<img
+  *ngIf="!lazyLoad"
+  [src]="src"
+  [alt]="alt"
+  class="{{ (_showPlaceholder | async) ? 'hide' : 'show' }}"
+  (load)="onImgLoad()"
+  [width]="imgWidth"
+  [height]="imgHeight"
+/>
+
+<!-- Lazy load img -->
+<img
+  *ngIf="lazyLoad"
+  [ngSrc]="src"
+  [alt]="alt"
+  class="{{ (_showPlaceholder | async) ? 'hide' : 'show' }}"
+  (load)="onImgLoad()"
+  [width]="imgWidth"
+  [height]="imgHeight"
+/>

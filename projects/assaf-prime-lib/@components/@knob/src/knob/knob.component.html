@@ -1,0 +1,15 @@
+<label *ngIf="label">{{ label }}</label>
+<p-knob
+  (ngModelChange)="onChange($event)"
+  [(ngModel)]="value"
+  [disabled]="disabled"
+  [readonly]="readOnly"
+  [min]="minValue"
+  [max]="maxValue"
+  [step]="step"
+  [strokeWidth]="strokeWidth"
+  [size]="size"
+  [valueColor]="valueColor"
+  [rangeColor]="rangeColor"
+  [valueTemplate]="_valueTemplate"
+></p-knob>

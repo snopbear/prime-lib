@@ -1,0 +1,43 @@
+<!-- Input floating label -->
+<ng-template [ngIf]="floatLabel" [ngIfElse]="elseBlock">
+  <span class="p-float-label {{ icon ? 'p-input-icon-' + iconPos : '' }}">
+    <!-- Input icon -->
+    <ng-container *ngTemplateOutlet="input"></ng-container>
+    <label *ngIf="label" class="{{ labelClass! }}">{{ label }}</label>
+  </span>
+</ng-template>
+
+<!-- Input without floating label -->
+<ng-template #elseBlock>
+  <label *ngIf="label" class="{{ labelClass! }}">{{ label }}</label>
+  <span *ngIf="icon; else basicInput" class="p-input-icon-{{ iconPos }}">
+    <ng-container *ngTemplateOutlet="basicInput"></ng-container>
+  </span>
+
+  <ng-template #basicInput>
+    <ng-container *ngTemplateOutlet="input"></ng-container>
+  </ng-template>
+</ng-template>
+
+<!-- Input template -->
+<ng-template #input>
+  <ng-container [formGroup]="_form">
+    <i class="pi {{ icon }}" *ngIf="icon"></i>
+    <input
+      pInputText
+      [tabIndex]="-1"
+      [autocomplete]="getAutoComplete()"
+      [type]="type"
+      [name]="name"
+      [formControlName]="controlName"
+      [placeholder]="placeholder"
+      class="p-inputtext-{{ size }} {{ styleClass }} {{
+        (_form.controls[controlName].status | formStatus : 'INVALID') &&
+        (_form.controls[controlName].touched ||
+          _form.controls[controlName].dirty)
+          ? 'ng-invalid ng-dirty'
+          : ''
+      }}"
+    />
+  </ng-container>
+</ng-template>

@@ -1,0 +1,89 @@
+.assaf-phonenumber {
+  display: flex;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  position: relative;
+  &:focus-within,
+  &:hover {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: 0 0 0 0.2rem #bfdbfe;
+    border-color: #3b82f6;
+  }
+
+  &__item,
+  &__selected {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__item {
+    .fi {
+      margin-inline-end: 7px;
+    }
+  }
+}
+
+.error-hover:hover {
+  cursor: pointer;
+}
+
+.error-section {
+  display: flex;
+  gap: 3px;
+}
+
+.assaf-inline-block {
+  display: inline-block;
+}
+
+.error-border {
+  border-color: red;
+}
+
+.error {
+  color: red;
+}
+
+::ng-deep .assaf-phonenumber__input {
+  width: 100% !important;
+}
+
+::ng-deep .assaf-phonenumber__dropdown,
+::ng-deep .assaf-phonenumber__input {
+  border-color: transparent !important;
+}
+
+::ng-deep .assaf-phonenumber__input:focus,
+::ng-deep .assaf-phonenumber__dropdown:focus {
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
+::ng-deep .assaf-phonenumber__dropdown {
+  position: static !important;
+  .p-overlay {
+    max-width: 100%;
+  }
+
+  .p-dropdown-trigger {
+    width: auto;
+    padding-inline-end: 3px;
+  }
+  .p-dropdown-panel {
+    width: 100% !important;
+  }
+
+  .p-dropdown-items-wrapper {
+    width: 100% !important;
+  }
+
+  .p-dropdown-item {
+    white-space: break-spaces;
+  }
+}
+
+::ng-deep .assaf-phonenumber__dropdown:not(.p-disabled).p-focus {
+  box-shadow: none !important;
+}

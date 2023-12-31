@@ -1,8 +1,25 @@
-<!-- <lib-assaf-primeng-lib color="green" text="Hello">
+<form [formGroup]="form" (ngSubmit)="Approve()">
+  <!-- <assaf-input controlName="basic" label="Basic Input"></assaf-input> -->
+  <assaf-button label="Save" severity="success" btnType="submit"></assaf-button>
+        <assaf-input
+          class="col-12 login__userName"
+          controlName="email"
+          labelClass="input-label"
+          [controlErrors]="emailErrors"
+          styleClass=" login__password--userName"
+        ></assaf-input>
+<assaf-input type="textarea" controlName="comment"
+   label="Textarea" placeholder="Textarea Input" 
+   [floatLabel]="true">
+</assaf-input> 
+</form>
+<assaf-badge value="10" size="xlarge"></assaf-badge> 
+<assaf-badge value="17"icon="pi-bell" 
+   styleClass="icon" severity="danger">
+</assaf-badge> 
 
-</lib-assaf-primeng-lib> -->
-<assaf-button label="Save" severity="success"></assaf-button> 
-<assaf-button mode="badge" badgeValue="1" label="Badge" badgeSeverity="danger"></assaf-button> 
-<assaf-button label="Text & Icon" btnIcon="pi-search" severity="success"></assaf-button> 
-<router-outlet></router-outlet> 
- 
+
+<assaf-rating controlName="number"
+   [stars]="10" [showCancel]="true">
+</assaf-rating> 
+<router-outlet></router-outlet>

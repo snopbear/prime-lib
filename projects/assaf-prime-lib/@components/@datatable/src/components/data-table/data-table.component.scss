@@ -1,0 +1,17 @@
+.table-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+::ng-deep .freeze {
+  .p-datatable-thead > tr > th {
+    position: -webkit-sticky;
+    position: sticky;
+    top: -2px;
+    z-index: 1;
+  }
+}
+
+.expanded-cell {
+  width: 100%;
+}

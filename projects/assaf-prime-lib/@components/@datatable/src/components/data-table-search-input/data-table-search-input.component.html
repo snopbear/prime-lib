@@ -1,0 +1,13 @@
+<label *ngIf="label" [class]="labelClass">{{ label }}</label>
+<span class="p-input-icon-{{ iconPos }} {{ styleClass }}">
+  <!-- Icon -->
+  <i class="pi {{ icon }}"></i>
+  <!-- Input -->
+  <input
+    [class]="inputStyleClass!"
+    pInputText
+    type="text"
+    (input)="template.filterGlobal($any($event.target).value, 'contains')"
+    [placeholder]="placeholder"
+  />
+</span>

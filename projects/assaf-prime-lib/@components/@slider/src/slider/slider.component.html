@@ -1,0 +1,47 @@
+<label *ngIf="label" class="{{ labelClass! }}">{{ label }}</label>
+
+<ng-template [ngIf]="_form" [ngIfElse]="elseBlock">
+  <!-- FormGroup mode -->
+  <ng-container [formGroup]="_form">
+    <p-slider
+      [formControlName]="controlName"
+      [min]="minBoundary"
+      [max]="maxBoundary"
+      [step]="step!"
+      [range]="range"
+      [styleClass]="styleClass"
+      [orientation]="orientation"
+    ></p-slider
+  ></ng-container>
+</ng-template>
+
+<!-- ngModel mode -->
+<ng-template #elseBlock>
+  <p-slider
+    [(ngModel)]="value"
+    (ngModelChange)="onChange($event)"
+    [min]="minBoundary"
+    [max]="maxBoundary"
+    [step]="step!"
+    [disabled]="disabled"
+    [orientation]="orientation"
+    [range]="range"
+    [styleClass]="styleClass"
+  ></p-slider>
+</ng-template>
+
+<!-- Formcontrol validations -->
+<ng-container
+  *ngIf="
+    controlErrors &&
+    !_form.controls[controlName].valid &&
+    (_form.controls[controlName].touched || _form.controls[controlName].dirty)
+  "
+>
+  <!-- https://github.com/angular/angular/issues/46867 -->
+  <ng-container *ngFor="let errorKey of _errorKeys">
+    <p *ngIf="_form.controls[controlName]?.errors?.[errorKey]" class="error">
+      {{ controlErrors[errorKey] }}
+    </p></ng-container
+  >
+</ng-container>

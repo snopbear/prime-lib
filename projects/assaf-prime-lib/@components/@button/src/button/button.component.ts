@@ -5,7 +5,7 @@ import {
   ButtonType,
   ButtonMode,
 } from '../models/button-model';
-import { Severity, Size } from '@assaf/assaf-prime-lib/models';
+import { Severity, Size } from 'assaf-prime-lib/models';
 
 
 @Component({

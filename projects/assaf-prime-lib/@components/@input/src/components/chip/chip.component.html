@@ -1,0 +1,29 @@
+<!-- Chips without floating label -->
+<ng-container *ngIf="!floatLabel">
+  <label *ngIf="label" class="{{ labelClass! }}">{{ label }}</label>
+  <ng-container *ngTemplateOutlet="chips"></ng-container>
+</ng-container>
+
+<!-- Chips with floating label -->
+<span *ngIf="floatLabel" class="p-float-label">
+  <ng-container *ngTemplateOutlet="chips"></ng-container>
+  <label *ngIf="label" class="{{ labelClass! }}">{{ label }}</label>
+</span>
+
+<!-- Chips template -->
+<ng-template #chips>
+  <ng-container [formGroup]="_form">
+    <p-chips
+      [formControlName]="controlName"
+      [separator]="sperator"
+      [styleClass]="styleClass"
+      [placeholder]="placeholder"
+      class="{{
+        (_form.controls[controlName].status | formStatus : 'INVALID') &&
+        (_form.controls[controlName].touched ||
+          _form.controls[controlName].dirty)
+          ? 'ng-invalid ng-dirty'
+          : ''
+      }}"
+    ></p-chips> </ng-container
+></ng-template>

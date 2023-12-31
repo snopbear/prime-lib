@@ -35,7 +35,7 @@
 
   <!-- Button set mode -->
   <span class="p-buttonset" *ngSwitchCase="'set'">
-    <ng-content select="assaf-button"></ng-content>
+    <ng-content  select="[assaf]"></ng-content>
   </span>
 
   <!-- Custom button content mode -->
@@ -52,6 +52,6 @@
     }}"
   >
     <!-- Provide an ng-template tag with content attribute -->
-    <ng-content select="[content]"></ng-content>
+    <ng-content select="[assaf]"></ng-content>
   </p-button>
 </ng-container>

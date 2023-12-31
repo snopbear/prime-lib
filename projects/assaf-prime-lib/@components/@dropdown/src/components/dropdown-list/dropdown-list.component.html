@@ -1,0 +1,19 @@
+<ng-container [ngSwitch]="mode">
+  <!-- Default mode (text mode) -->
+  <div *ngSwitchDefault>{{ listItem.key }}</div>
+  <!-- Text with icon mode -->
+  <div *ngSwitchCase="'text-icon'">
+    <span [class]="listItem.iconName"></span>
+    <span>{{ listItem.key }}</span>
+  </div>
+  <!-- Text with svg mode -->
+  <div *ngSwitchCase="'text-svg'">
+    <img [alt]="listItem.key" [src]="listItem.iconURL" />
+    <span>{{ listItem.key }}</span>
+  </div>
+  <!-- Text with flag mode -->
+  <div *ngSwitchCase="'text-flag'">
+    <span class="fi fi-{{ listItem.key | getFlag }} {{ class }}"></span>
+    <span>{{ listItem.key }}</span>
+  </div>
+</ng-container>

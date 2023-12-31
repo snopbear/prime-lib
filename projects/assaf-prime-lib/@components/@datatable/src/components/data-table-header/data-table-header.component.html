@@ -1,0 +1,23 @@
+<ng-container *ngFor="let head of columns">
+  <!-- All row selection (in checkbox mode only) -->
+  <th *ngIf="head.type === 'checkbox'" [class]="head.headerStyleClass!">
+    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+  </th>
+  <!-- No sorting -->
+  <th
+    *ngIf="!head.sortable && head.type !== 'checkbox'"
+    [class]="head.headerStyleClass!"
+  >
+    {{ head.title }}
+  </th>
+  <!-- With sorting -->
+  <th
+    *ngIf="head.sortable"
+    [pSortableColumn]="head.dataKey!"
+    [class]="head.headerStyleClass!"
+  >
+    <span>{{ head.title }}</span>
+    <p-sortIcon [field]="head.dataKey!"></p-sortIcon>
+  </th>
+</ng-container>
+<th *ngIf="showExpandButton"></th>

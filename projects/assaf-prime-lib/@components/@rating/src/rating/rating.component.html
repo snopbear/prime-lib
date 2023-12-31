@@ -1,0 +1,48 @@
+<label *ngIf="label" class="{{ labelClass! }}">{{ label }}</label>
+
+<ng-template [ngIf]="_form" [ngIfElse]="elseBlock">
+  <!-- FormGroup mode -->
+  <ng-container [formGroup]="_form">
+    <p-rating
+      [readonly]="readonly"
+      [stars]="stars"
+      [cancel]="showCancel"
+      [formControlName]="controlName"
+      iconCancelClass="pi {{ cancelIconClass }}"
+      iconOnClass="pi {{ onIconClass }}"
+      iconOffClass="pi {{ offIconClass }}"
+    >
+    </p-rating>
+  </ng-container>
+</ng-template>
+
+<!-- ngModel mode -->
+<ng-template #elseBlock>
+  <p-rating
+    [(ngModel)]="value"
+    [readonly]="readonly"
+    (ngModelChange)="onChange($event)"
+    [stars]="stars"
+    [cancel]="showCancel"
+    iconCancelClass="pi {{ cancelIconClass }}"
+    iconOnClass="pi {{ onIconClass }}"
+    iconOffClass="pi {{ offIconClass }}"
+  >
+  </p-rating>
+</ng-template>
+
+<!-- Formcontrol validations -->
+<ng-container
+  *ngIf="
+    controlErrors &&
+    !_form.controls[controlName].valid &&
+    (_form.controls[controlName].touched || _form.controls[controlName].dirty)
+  "
+>
+  <!-- https://github.com/angular/angular/issues/46867 -->
+  <ng-container *ngFor="let errorKey of _errorKeys">
+    <p *ngIf="_form.controls[controlName]?.errors?.[errorKey]" class="error">
+      {{ controlErrors[errorKey] }}
+    </p></ng-container
+  >
+</ng-container>

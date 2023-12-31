@@ -1,0 +1,26 @@
+<ng-container [formGroup]="_form">
+  <p-radioButton
+    *ngFor="let item of data"
+    [label]="item.key"
+    [value]="item.value"
+    [formControlName]="controlName"
+    [styleClass]="styleClass"
+  >
+  </p-radioButton>
+</ng-container>
+
+<!-- Formcontrol validations -->
+<ng-container
+  *ngIf="
+    controlErrors &&
+    !_form.controls[controlName].valid &&
+    (_form.controls[controlName].touched || _form.controls[controlName].dirty)
+  "
+>
+  <!-- https://github.com/angular/angular/issues/46867 -->
+  <ng-container *ngFor="let errorKey of _errorKeys">
+    <p *ngIf="_form.controls[controlName]?.errors?.[errorKey]" class="error">
+      {{ controlErrors[errorKey] }}
+    </p></ng-container
+  >
+</ng-container>

@@ -1,0 +1,90 @@
+<!-- Label -->
+<label *ngIf="label" class="{{ labelStyleClass }}">{{ label }}</label>
+
+<!-- Phone number input -->
+<div class="assaf-inline-block  {{ styleClass }}">
+  <div
+    class="assaf-phonenumber{{
+      _formControl.invalid && (_formControl.touched || _formControl.dirty)
+        ? ' error-border'
+        : ''
+    }}"
+  >
+    <!-- Country dropdown -->
+    <p-dropdown
+      [tabIndex]="-1"
+      [options]="_countries"
+      [(ngModel)]="_selectedCountry"
+      (onChange)="activeDialChanged($event)"
+      optionLabel="name"
+      [filter]="true"
+      placeholder="+###"
+      filterBy="name,dial_code"
+      styleClass="assaf-phonenumber__dropdown {{ dropdownStyleClass }}"
+    >
+      <!-- Selected item -->
+      <ng-template pTemplate="selectedItem">
+        <div class="assaf-phonenumber__selected" *ngIf="_selectedCountry">
+          <i class="fi fi-{{ _selectedCountry.code }}"></i>
+          <span>{{ _selectedCountry.dial_code }}</span>
+        </div>
+      </ng-template>
+
+      <!-- Dropdown item -->
+      <ng-template let-country pTemplate="item">
+        <div class="assaf-phonenumber__item">
+          <div>
+            <i class="fi fi-{{ country.code }}"></i>
+            <span>{{ country.name }}</span>
+          </div>
+          <span>{{ country.dial_code }}</span>
+        </div>
+      </ng-template>
+    </p-dropdown>
+
+    <!-- Phone input -->
+    <input
+      noPlus
+      pInputText
+      [tabIndex]="-1"
+      class="assaf-phonenumber__input {{ inputStyleClass }}"
+      type="tel"
+      [placeholder]="getPlaceholder()"
+      [(ngModel)]="_phoneNumber"
+      (ngModelChange)="onPhoneChange($event)"
+      (click)="touched()"
+      name="tel"
+      [pattern]="_selectedCountry.patternInput!"
+    />
+  </div>
+</div>
+
+<!-- Formcontrol validations -->
+<ng-container
+  *ngIf="
+    controlErrors &&
+    !_form.controls[controlName].valid &&
+    (_form.controls[controlName].touched || _form.controls[controlName].dirty)
+  "
+>
+  <!-- https://github.com/angular/angular/issues/46867 -->
+  <ng-container *ngFor="let errorKey of _errorKeys">
+    <div class="error-section" (click)="toggleShow()">
+      <p
+        *ngIf="_form.controls[controlName]?.errors?.[errorKey]"
+        class="error {{ hasDetailedError ? 'error-hover' : '' }}"
+      >
+        {{ controlErrors[errorKey] }}
+      </p>
+      <i
+        class="pi {{
+          _showErrorDetails ? 'pi-angle-up' : 'pi-angle-down'
+        }} error"
+        *ngIf="hasDetailedError"
+      ></i>
+    </div>
+    <p class="error" *ngIf="_showErrorDetails">
+      {{ _formControl.value }}
+    </p>
+  </ng-container>
+</ng-container>

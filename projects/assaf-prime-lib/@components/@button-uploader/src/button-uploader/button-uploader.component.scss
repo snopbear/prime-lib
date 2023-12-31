@@ -1,0 +1,29 @@
+.button-uploader {
+  width: max-content;
+  display: inline-block;
+  &__label {
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .pi {
+      margin-right: 0.5rem;
+    }
+  }
+  input {
+    display: none;
+  }
+}
+
+.right {
+  i {
+    order: 2;
+  }
+  span {
+    order: 1;
+  }
+  .pi {
+    margin-right: 0;
+    margin-left: 0.5rem;
+  }
+}

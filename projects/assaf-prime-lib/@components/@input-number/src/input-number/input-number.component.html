@@ -1,0 +1,64 @@
+<!-- Input number with floating label -->
+<ng-template [ngIf]="floatLabel" [ngIfElse]="elseBlock">
+  <span class="p-float-label">
+    <ng-container *ngTemplateOutlet="inputNumber"></ng-container>
+    <label *ngIf="label">{{ label }}</label>
+  </span>
+</ng-template>
+
+<!-- Input number without floating label -->
+<ng-template #elseBlock>
+  <label *ngIf="label" class="{{ labelClass! }}">{{ label }}</label>
+  <ng-container *ngTemplateOutlet="inputNumber"></ng-container>
+</ng-template>
+
+<!-- Input number template -->
+<ng-template [formGroup]="_form" #inputNumber>
+  <p-inputNumber
+    [mode]="mode"
+    [formControlName]="controlName"
+    [styleClass]="styleClass!"
+    [placeholder]="placeholder"
+    [size]="size"
+    [buttonLayout]="buttonLayout"
+    [prefix]="prefix"
+    [suffix]="suffix"
+    [minFractionDigits]="minFractionDigits"
+    [maxFractionDigits]="maxFractionDigits"
+    [step]="step"
+    [inputStyleClass]="inputStyleClass!"
+    [readonly]="readOnly"
+    [showClear]="showClear"
+    [showButtons]="showButtons"
+    [incrementButtonClass]="incrementButtonClass!"
+    [decrementButtonClass]="decrementButtonClass!"
+    incrementButtonIcon="pi {{ incrementButtonIcon! }}"
+    decrementButtonIcon="pi {{ decrementButtonIcon! }}"
+    [locale]="locale"
+    [localeMatcher]="localeMatcher"
+    [currency]="currency!"
+    [useGrouping]="useGrouping"
+    class="{{
+      (_form.controls[controlName].status | formStatus : 'INVALID') &&
+      (_form.controls[controlName].touched || _form.controls[controlName].dirty)
+        ? 'ng-invalid ng-dirty'
+        : ''
+    }}"
+  ></p-inputNumber>
+</ng-template>
+
+<!-- Formcontrol validations -->
+<ng-container
+  *ngIf="
+    controlErrors &&
+    !_form.controls[controlName].valid &&
+    (_form.controls[controlName].touched || _form.controls[controlName].dirty)
+  "
+>
+  <!-- https://github.com/angular/angular/issues/46867 -->
+  <ng-container *ngFor="let errorKey of _errorKeys">
+    <p *ngIf="_form.controls[controlName]?.errors?.[errorKey]" class="error">
+      {{ controlErrors[errorKey] }}
+    </p></ng-container
+  >
+</ng-container>

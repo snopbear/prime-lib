@@ -3,7 +3,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@assaf/assaf-prime-lib/*": ["projects/assaf-prime-lib/*"]
+      "assaf-prime-lib/*": ["projects/assaf-prime-lib/*"]
     },
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",

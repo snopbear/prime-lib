@@ -1,0 +1,31 @@
+<!-- Textarea without floating label -->
+<ng-container *ngIf="!floatLabel">
+  <label *ngIf="label" class="{{ labelClass! }}">{{ label }}</label>
+  <ng-container *ngTemplateOutlet="textarea"></ng-container>
+</ng-container>
+
+<!-- Textarea with floating label -->
+<span *ngIf="floatLabel" class="p-float-label">
+  <ng-container *ngTemplateOutlet="textarea"></ng-container>
+  <label *ngIf="label" class="{{ labelClass! }}">{{ label }}</label>
+</span>
+
+<ng-template #textarea>
+  <ng-container [formGroup]="_form">
+    <textarea
+      [tabIndex]="-1"
+      pInputTextarea
+      [formControlName]="controlName"
+      [placeholder]="placeholder"
+      class="{{ styleClass }} {{
+        (_form.controls[controlName].status | formStatus : 'INVALID') &&
+        (_form.controls[controlName].touched ||
+          _form.controls[controlName].dirty)
+          ? 'ng-invalid ng-dirty'
+          : ''
+      }}"
+      [autoResize]="autoSize"
+      rows="{{ rows }}"
+    ></textarea>
+  </ng-container>
+</ng-template>

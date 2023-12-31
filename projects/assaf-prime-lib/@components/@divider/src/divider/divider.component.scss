@@ -1,0 +1,14 @@
+.icon__container {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.right {
+  i {
+    order: 2;
+  }
+  b {
+    order: 1;
+  }
+}

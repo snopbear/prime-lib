@@ -1,0 +1,27 @@
+<!-- Default view -->
+<p-image
+  *ngIf="!customPreview"
+  [src]="src"
+  [alt]="alt"
+  [width]="width"
+  [preview]="showPreview"
+  [height]="height"
+  [imageClass]="imageStyle"
+  [styleClass]="styleClass"
+></p-image>
+
+<!-- Custom preview -->
+<p-image
+  *ngIf="customPreview"
+  [src]="src"
+  [alt]="alt"
+  [width]="width"
+  [preview]="showPreview"
+  [height]="height"
+  [imageClass]="imageStyle"
+  [styleClass]="styleClass"
+>
+  <ng-template pTemplate="indicator">
+    <ng-content></ng-content>
+  </ng-template>
+</p-image>

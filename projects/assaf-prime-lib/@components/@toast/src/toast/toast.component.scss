@@ -1,0 +1,11 @@
+::ng-deep .assaf-toast {
+  .p-toast-message-icon {
+    display: none;
+  }
+  .p-toast-message-text {
+    margin-left: 0 !important;
+  }
+  .p-toast-detail {
+    display: none;
+  }
+}

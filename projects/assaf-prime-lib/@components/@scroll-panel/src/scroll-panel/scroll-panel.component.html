@@ -1,0 +1,11 @@
+<p-scrollPanel [styleClass]="containerClass">
+  <ng-content></ng-content>
+  <p-scrollTop
+    *ngIf="hasScrollTop"
+    icon="pi {{ icon }}"
+    [styleClass]="scrollTopClass"
+    [behavior]="behavior"
+    [target]="target"
+    [threshold]="threshold"
+  ></p-scrollTop>
+</p-scrollPanel>

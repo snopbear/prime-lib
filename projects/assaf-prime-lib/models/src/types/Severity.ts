@@ -5,3 +5,4 @@ export declare type Severity =
   | 'warning'
   | 'help'
   | 'danger';
+

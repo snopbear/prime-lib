@@ -1,0 +1,18 @@
+<!-- Basic -->
+<p-badge
+  *ngIf="!icon"
+  [value]="value"
+  [severity]="severity"
+  [size]="size"
+  [styleClass]="styleClass!"
+></p-badge>
+<!-- Icon with badge -->
+<i
+  *ngIf="icon"
+  class="pi {{ icon }} {{ styleClass! }}"
+  pBadge
+  [value]="value"
+  [severity]="severity"
+></i>
+
+

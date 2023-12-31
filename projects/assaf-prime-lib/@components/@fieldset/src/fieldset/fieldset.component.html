@@ -1,0 +1,22 @@
+<!-- Multiple fieldsets -->
+<ng-container *ngIf="isArray(); else elseBlock">
+  <p-fieldset
+    *ngFor="let item of $any(data)"
+    [legend]="item.header"
+    [toggleable]="item.isToggleable"
+    [styleClass]="styleClass"
+  >
+    <p>{{ item.content }}</p>
+  </p-fieldset>
+</ng-container>
+
+<!-- Single fieldset -->
+<ng-template #elseBlock>
+  <p-fieldset
+    [legend]="$any(data).header"
+    [toggleable]="$any(data).isToggleable"
+    [styleClass]="styleClass"
+  >
+    <p>{{ $any(data).content }}</p>
+  </p-fieldset>
+</ng-template>

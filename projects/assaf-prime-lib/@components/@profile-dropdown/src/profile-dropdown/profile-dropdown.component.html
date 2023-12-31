@@ -1,0 +1,25 @@
+<button
+  #toggleButton
+  (click)="menu.toggle($event); changeIcon()"
+  class="toggle-button {{ buttonStyleClass! }}"
+>
+  <!-- Profile image -->
+  <figure *ngIf="image">
+    <img [src]="image" alt="profile-img" />
+  </figure>
+  <!-- Profile icon -->
+  <i *ngIf="icon" class="pi {{ icon }}"></i>
+  <!-- Profile text -->
+  <span *ngIf="label">{{ label }}</span>
+  <!-- Menu arrow -->
+  <i class="pi {{ _toggleIcon ? 'pi-angle-up' : 'pi-angle-down' }}"></i>
+</button>
+
+<!-- Dropdown menu -->
+<p-menu
+  #menu
+  [model]="menuItems"
+  [popup]="true"
+  [styleClass]="menuStyleClass!"
+  [baseZIndex]="zIndex!"
+></p-menu>

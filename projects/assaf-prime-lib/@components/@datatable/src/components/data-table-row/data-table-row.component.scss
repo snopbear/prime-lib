@@ -1,0 +1,18 @@
+td {
+  ul {
+    list-style-position: inside;
+  }
+}
+.image-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  figure {
+    width: 100px;
+    margin: 0 !important;
+    font-size: 0;
+    img {
+      max-width: 100%;
+    }
+  }
+}

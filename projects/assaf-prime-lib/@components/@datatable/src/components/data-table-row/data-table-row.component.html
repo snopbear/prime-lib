@@ -1,0 +1,153 @@
+<ng-template ngFor let-cellConfig [ngForOf]="tableColumns">
+  <ng-container [ngSwitch]="cellConfig.type">
+    <!-- Text cell -->
+    <td
+      *ngSwitchCase="'text'"
+      class="{{ cellConfig.cellStyleClass! }} {{
+        rowItem | conditionalStyle : cellConfig.stylePipe!
+      }}"
+    >
+      <span class="p-column-title {{ cellConfig.mobileHeaderStyleClass! }}">{{
+        cellConfig.title
+      }}</span>
+      <!-- Renders a list of text or single line of text based on dataKey data type -->
+      <ng-container *ngIf="!isArray(rowItem[cellConfig.dataKey!])">
+        {{
+          rowItem[cellConfig.dataKey!] | transformText : cellConfig.textPipe!
+        }}
+      </ng-container>
+
+      <ul *ngIf="isArray(rowItem[cellConfig.dataKey!])">
+        <li *ngFor="let item of rowItem[cellConfig.dataKey!]">
+          {{ item | transformText : cellConfig.textPipe! }}
+        </li>
+      </ul>
+    </td>
+
+    <!-- Image cell -->
+    <td
+      *ngSwitchCase="'image'"
+      class="image-cell {{ cellConfig.cellStyleClass! }} {{
+        rowItem | conditionalStyle : cellConfig.stylePipe!
+      }}"
+    >
+      <span class="p-column-title {{ cellConfig.mobileHeaderStyleClass! }}">{{
+        cellConfig.title
+      }}</span>
+      <figure>
+        <img [src]="rowItem[cellConfig.dataKey!]" alt="table-img" />
+      </figure>
+    </td>
+
+    <!-- Checkbox cell -->
+    <td *ngSwitchCase="'checkbox'" class="{{ cellConfig.cellStyleClass! }}">
+      <span class="p-column-title {{ cellConfig.mobileHeaderStyleClass! }}">{{
+        cellConfig.title
+      }}</span>
+      <p-tableCheckbox [value]="rowItem"></p-tableCheckbox>
+    </td>
+
+    <!-- Icon cell -->
+    <td
+      *ngSwitchCase="'icon'"
+      class="{{ cellConfig.cellStyleClass! }} {{
+        rowItem | conditionalStyle : cellConfig.stylePipe!
+      }}"
+    >
+      <span class="p-column-title {{ cellConfig.mobileHeaderStyleClass! }}">{{
+        cellConfig.title
+      }}</span>
+      <i class="pi {{ cellConfig.cellIcon! }}"></i>
+    </td>
+
+    <!-- Switch cell -->
+    <td
+      *ngSwitchCase="'switch'"
+      class="{{ cellConfig.cellStyleClass! }} {{
+        rowItem | conditionalStyle : cellConfig.stylePipe!
+      }}"
+    >
+      <span class="p-column-title {{ cellConfig.mobileHeaderStyleClass! }}">{{
+        cellConfig.title
+      }}</span>
+      <p-inputSwitch
+        [(ngModel)]="rowItem[cellConfig.dataKey!]"
+        (ngModelChange)="valueChanged(cellConfig.switchConfig?.event!)"
+      ></p-inputSwitch>
+    </td>
+
+    <!-- Link cell -->
+    <td
+      *ngSwitchCase="'link'"
+      class="{{ cellConfig.cellStyleClass! }} {{
+        rowItem | conditionalStyle : cellConfig.stylePipe!
+      }}"
+    >
+      <span class="p-column-title {{ cellConfig.mobileHeaderStyleClass! }}">{{
+        cellConfig.title
+      }}</span>
+      <a [href]="rowItem[cellConfig.dataKey!]">{{
+        rowItem[cellConfig.dataKey!]
+      }}</a>
+    </td>
+
+    <!-- Buttons cell -->
+    <td
+      *ngSwitchCase="'button'"
+      class="{{ cellConfig.cellStyleClass! }} {{
+        rowItem | conditionalStyle : cellConfig.stylePipe!
+      }}"
+    >
+      <span class="p-column-title {{ cellConfig.mobileHeaderStyleClass! }}">{{
+        cellConfig.title
+      }}</span>
+      <assaf-button
+        *ngFor="let button of cellConfig.btnConfig"
+        [severity]="button.severity!"
+        [btnIcon]="button.icon!"
+        [label]="button.label || rowItem[cellConfig.dataKey!]"
+        (click)="valueChanged(button.event)"
+        [isOutline]="button.isOutline!"
+        [isRaised]="button.isRaised!"
+        [isText]="button.isText!"
+        [isRounded]="button.isRounded!"
+        [styleClass]="button.class!"
+        [iconPos]="button.iconPos!"
+        [isLink]="button.isLink!"
+      ></assaf-button>
+    </td>
+
+    <!-- Dropdown cell -->
+    <td
+      *ngSwitchCase="'dropdown'"
+      class="{{ cellConfig.cellStyleClass! }} {{
+        rowItem | conditionalStyle : cellConfig.stylePipe!
+      }}"
+    >
+      <span class="p-column-title {{ cellConfig.mobileHeaderStyleClass! }}">{{
+        cellConfig.title
+      }}</span>
+      <p-dropdown
+        [styleClass]="cellConfig.dropDownConfig?.styleClass!"
+        [showClear]="cellConfig.dropDownConfig?.showClear!"
+        optionLabel="key"
+        optionValue="value"
+        [options]="cellConfig.dropDownConfig?.data!"
+        [placeholder]="cellConfig.dropDownConfig?.placeholder!"
+        [(ngModel)]="rowItem[cellConfig.dataKey!]"
+        (ngModelChange)="valueChanged(cellConfig.dropDownConfig?.event!)"
+      ></p-dropdown></td
+  ></ng-container>
+</ng-template>
+
+<!-- Expand row button cell -->
+<td *ngIf="showExpandButton">
+  <button
+    type="button"
+    pButton
+    pRipple
+    [pRowToggler]="rowItem!"
+    icon="pi {{ expanded ? 'pi-angle-up' : 'pi-angle-down' }}"
+    class="p-button-text p-button-rounded p-button-plain"
+  ></button>
+</td>

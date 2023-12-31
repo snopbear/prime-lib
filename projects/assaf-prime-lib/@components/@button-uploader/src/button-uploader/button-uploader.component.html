@@ -1,0 +1,26 @@
+<div class="button-uploader {{ styleClass! }}">
+  <label
+    pButton
+    pRipple
+    class="button-uploader__label p-button-{{ severity }} {{
+      isRounded ? 'p-button-rounded' : ''
+    }} {{ isText ? 'p-button-text' : '' }} {{
+      isRaised ? 'p-button-raised' : ''
+    }} {{ isOutline ? 'p-button-outlined' : '' }} {{
+      iconPos === 'right' ? 'right' : ''
+    }} p-button-{{ size }}"
+  >
+    <!-- Button icon -->
+    <i *ngIf="btnIcon" class="{{ btnIcon ? 'pi ' + btnIcon : '' }}"></i>
+    <!-- Button text -->
+    <span *ngIf="label" class="button-uploader__text">{{ label! }}</span>
+    <!-- File input -->
+    <input
+      type="file"
+      [accept]="fileType"
+      [multiple]="multiple"
+      (change)="onFileSelect($event)"
+      (click)="onFileClick($event)"
+    />
+  </label>
+</div>

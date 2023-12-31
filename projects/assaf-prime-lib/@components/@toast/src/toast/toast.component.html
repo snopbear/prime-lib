@@ -1,0 +1,20 @@
+<!-- Basic toast -->
+<p-toast
+  *ngIf="!isResponsive; else elseBlock"
+  [key]="key!"
+  [position]="position"
+  [styleClass]="styleClass"
+  [baseZIndex]="zIndex"
+></p-toast>
+
+<!-- Responisve toast -->
+<ng-template #elseBlock>
+  <p-toast
+    [breakpoints]="_activeBreakpoint"
+    *ngIf="_isMobile | async as value"
+    [key]="key!"
+    [position]="value > breakpoint ? position : 'bottom-center'"
+    styleClass="{{ value <= breakpoint ? 'assaf-toast ' : '' }}{{ styleClass }}"
+    [baseZIndex]="zIndex"
+  ></p-toast>
+</ng-template>

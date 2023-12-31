@@ -1,0 +1,15 @@
+<p-tabView
+  styleClass="assaf-tabview {{ styleClass! }}"
+  (activeIndexChange)="indexChange($event)"
+>
+  <p-tabPanel
+    *ngFor="let item of items"
+    [header]="item.header"
+    [headerStyleClass]="item.headerStyleClass!"
+    leftIcon="{{ item.leftIcon ? 'pi ' + item.leftIcon : '' }}"
+    rightIcon="{{ item.rightIcon ? 'pi ' + item.rightIcon : '' }}"
+  ></p-tabPanel>
+</p-tabView>
+
+<!-- Conatiner lazy loads children -->
+<ng-container #container></ng-container>

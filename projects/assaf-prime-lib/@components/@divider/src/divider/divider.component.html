@@ -1,0 +1,49 @@
+<ng-container [ngSwitch]="mode">
+  <!-- Default mode -->
+  <p-divider
+    *ngSwitchDefault
+    [layout]="layout"
+    [align]="align"
+    [type]="type"
+    [styleClass]="styleClass"
+  >
+    <b>{{ label }}</b>
+  </p-divider>
+
+  <!-- Badge mode -->
+  <p-divider
+    *ngSwitchCase="'badge'"
+    [layout]="layout"
+    [align]="align"
+    [type]="type"
+    [styleClass]="styleClass"
+  >
+    <span class="p-tag">{{ label }}</span>
+  </p-divider>
+
+  <!-- Custom mode -->
+  <p-divider
+    *ngSwitchCase="'custom'"
+    [layout]="layout"
+    [align]="align"
+    [type]="type"
+    [styleClass]="styleClass"
+  >
+    <!-- Accepts external children -->
+    <ng-content></ng-content>
+  </p-divider>
+
+  <!-- Icon mode -->
+  <p-divider
+    *ngSwitchCase="'icon'"
+    [layout]="layout"
+    [align]="align"
+    [type]="type"
+    [styleClass]="styleClass"
+  >
+    <div class="icon__container {{ iconPos }}">
+      <i class="pi {{ icon }}" *ngIf="icon"></i>
+      <b>{{ label }}</b>
+    </div>
+  </p-divider>
+</ng-container>

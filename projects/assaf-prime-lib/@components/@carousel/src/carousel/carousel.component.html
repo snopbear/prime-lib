@@ -1,0 +1,22 @@
+<p-carousel
+  [styleClass]="styleClass"
+  [value]="data"
+  [numVisible]="numVisible"
+  [numScroll]="numScroll"
+  [circular]="circular"
+  [responsiveOptions]="responsiveOptions"
+  [autoplayInterval]="autoplayInterval"
+  [verticalViewPortHeight]="verticalViewPortHeight"
+  [orientation]="orientation"
+  [showIndicators]="showIndicators"
+  [showNavigators]="showNavigators"
+  [indicatorsContentClass]="indicatorsContentClass"
+  [indicatorStyleClass]="indicatorStyleClass"
+>
+  <ng-template let-item pTemplate="item">
+    <ng-template
+      [ngTemplateOutlet]="templateRef"
+      [ngTemplateOutletContext]="{ $implicit: item }"
+    ></ng-template>
+  </ng-template>
+</p-carousel>

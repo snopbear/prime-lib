@@ -1,0 +1,74 @@
+<p-table
+  #dt
+  [dataKey]="rowExpansionDataKey"
+  (sortFunction)="customSort.emit($event)"
+  [customSort]="hasCustomSort"
+  tableStyleClass="{{ freezeHeader ? 'freeze' : '' }} {{ tableClass! }}"
+  [value]="data"
+  styleClass="{{ size ? 'p-datatable-' + size : '' }} {{
+    gridLines ? 'p-datatable-gridlines' : ''
+  }} {{ isStriped ? 'p-datatable-striped' : '' }} {{ styleClass! }}"
+  [paginator]="paginate"
+  [rows]="rowsCountPerPage"
+  [rowsPerPageOptions]="rowsPerPageOptions"
+  [showCurrentPageReport]="showPageReport"
+  [scrollHeight]="scrollHeight"
+  (selectionChange)="onSelectionChange($event)"
+  [(selection)]="_selectedRows"
+  [filterDelay]="0"
+  [globalFilterFields]="filterKeys"
+  [expandedRowKeys]="_expandedKeys ? _expandedKeys : {}"
+  [lazy]="lazyLoad"
+  (onLazyLoad)="lazyLoaded($event)"
+  [totalRecords]="totalRecords"
+  [(first)]="_paginationFirstIndex"
+  [loading]="loading"
+  responsiveLayout="stack"
+  [breakpoint]="responsiveBreakPoint"
+>
+  <!-- Table caption -->
+  <ng-template pTemplate="caption" *ngIf="_caption">
+    <ng-template
+      [ngTemplateOutlet]="_caption"
+      [ngTemplateOutletContext]="{ $implicit: dt }"
+    ></ng-template>
+  </ng-template>
+
+  <!-- Table header -->
+  <ng-template pTemplate="header" *ngIf="showTableHeader">
+    <tr
+      assaf-data-table-header
+      [columns]="tableColumns"
+      [showExpandButton]="_expandedRow && showExpandedButton"
+    ></tr>
+  </ng-template>
+
+  <!-- Table body -->
+  <ng-template pTemplate="body" let-item let-expanded="expanded">
+    <tr
+      (click)="onRowClick(item)"
+      assaf-data-table-row
+      [rowItem]="item"
+      [tableColumns]="tableColumns"
+      [expanded]="expanded"
+      [showExpandButton]="_expandedRow && showExpandedButton"
+    ></tr>
+  </ng-template>
+
+  <!-- Expanded row template -->
+  <ng-template pTemplate="rowexpansion" let-rowData *ngIf="_expandedRow">
+    <tr>
+      <td [colSpan]="tableColumns.length + 1">
+        <ng-template
+          [ngTemplateOutlet]="_expandedRow"
+          [ngTemplateOutletContext]="{ $implicit: rowData }"
+        ></ng-template>
+      </td>
+    </tr>
+  </ng-template>
+
+  <!-- Table summary -->
+  <ng-template pTemplate="summary" *ngIf="_summary">
+    <ng-template [ngTemplateOutlet]="_summary"></ng-template>
+  </ng-template>
+</p-table>

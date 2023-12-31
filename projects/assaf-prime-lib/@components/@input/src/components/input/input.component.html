@@ -1,0 +1,78 @@
+<ng-container [ngSwitch]="type" [formGroup]="_form">
+  <!-- Text input -->
+  <assaf-textinput
+    *ngSwitchDefault
+    [controlName]="controlName"
+    [label]="label"
+    [placeholder]="placeholder"
+    [icon]="icon"
+    [iconPos]="iconPos"
+    [floatLabel]="floatLabel"
+    [size]="size"
+    [styleClass]="styleClass"
+    [labelClass]="labelClass"
+    [type]="type"
+    [name]="name"
+    [autocomplete]="autocomplete ? 'on' : 'off'"
+  ></assaf-textinput>
+
+  <!-- Password input -->
+  <assaf-passwordinput
+    *ngSwitchCase="'password'"
+    [controlName]="controlName"
+    [label]="label"
+    [placeholder]="placeholder"
+    [floatLabel]="floatLabel"
+    [toggleMask]="toggleMask"
+    [feedback]="passwordFeedback"
+    [styleClass]="styleClass"
+    [labelClass]="labelClass"
+  >
+    <!-- Passing password child content -->
+    <ng-container ngProjectAs="[password]">
+      <!-- <p-divider></p-divider> -->
+      <ng-content select="[password]"></ng-content>
+    </ng-container>
+  </assaf-passwordinput>
+
+  <!-- Textarea input -->
+  <assaf-textarea
+    *ngSwitchCase="'textarea'"
+    [controlName]="controlName"
+    [label]="label"
+    [placeholder]="placeholder"
+    [floatLabel]="floatLabel"
+    [autoSize]="autoSize"
+    [styleClass]="styleClass"
+    [rows]="rows"
+    [labelClass]="labelClass"
+  ></assaf-textarea>
+
+  <!-- Chips input -->
+  <assaf-chip
+    *ngSwitchCase="'chips'"
+    [controlName]="controlName"
+    [sperator]="chipSeperator"
+    [placeholder]="placeholder"
+    [floatLabel]="floatLabel"
+    [label]="label"
+    [styleClass]="styleClass"
+    [labelClass]="labelClass"
+  ></assaf-chip>
+</ng-container>
+
+<!-- Formcontrol validations -->
+<ng-container
+  *ngIf="
+    controlErrors &&
+    !_form.controls[controlName].valid &&
+    (_form.controls[controlName].touched || _form.controls[controlName].dirty)
+  "
+>
+  <!-- https://github.com/angular/angular/issues/46867 -->
+  <ng-container *ngFor="let errorKey of _errorKeys">
+    <p *ngIf="_form.controls[controlName]?.errors?.[errorKey]" class="error">
+      {{ controlErrors[errorKey] }}
+    </p></ng-container
+  >
+</ng-container>

@@ -1,0 +1,38 @@
+<div
+  class="uploader {{ styleClass! }}"
+  [ngStyle]="{
+    width: width,
+    height: height,
+    'max-width': width,
+    'max-height': height
+  }"
+>
+  <!-- File selector -->
+  <ng-template [ngIf]="!_activateInplace" [ngIfElse]="elseBlock">
+    <label class="uploader__file-selector {{ uploaderClass! }}">
+      <i class="uploader__icon pi {{ uploadIcon }}"></i>
+      <input
+        type="file"
+        [accept]="fileType"
+        (change)="onFileSelect($event)"
+        (click)="onFileClick($event)"
+      />
+    </label>
+  </ng-template>
+  <!-- Selected image preview -->
+  <ng-template #elseBlock>
+    <figure
+      class="uploader__img-container {{ activeImageClass! }}"
+      (click)="onCancelClick()"
+    >
+      <!-- Overlay (active on hover) -->
+      <i
+        class="uploader__overlay uploader__icon pi {{ overlayIcon }} {{
+          overlayClass!
+        }}"
+      ></i>
+      <!-- Selected image -->
+      <img [src]="_activeImage" alt="uploader-img" />
+    </figure>
+  </ng-template>
+</div>

@@ -1,0 +1,183 @@
+<!-- Calendar with floating label -->
+<ng-template [ngIf]="floatLabel" [ngIfElse]="elseBlock">
+  <span class="p-float-label">
+    <ng-container *ngTemplateOutlet="calendar"></ng-container>
+    <label *ngIf="label" class="{{ labelClass! }}">{{ label }}</label>
+  </span>
+</ng-template>
+
+<!-- Calendar without floating label -->
+<ng-template #elseBlock>
+  <label *ngIf="label" class="{{ labelClass! }}">{{ label }}</label>
+  <ng-container *ngTemplateOutlet="calendar"></ng-container>
+</ng-template>
+
+<!-- Calendar template -->
+<ng-template #calendar>
+  <ng-container [ngSwitch]="mode" [formGroup]="_form">
+    <!-- Basic mode -->
+    <p-calendar
+      [placeholder]="placeholder"
+      *ngSwitchDefault
+      [dateFormat]="dateFormat"
+      [showIcon]="showCalendarIcon"
+      [readonlyInput]="readOnly"
+      [showButtonBar]="showButtons"
+      [showWeek]="showWeeks"
+      [styleClass]="styleClass"
+      [inline]="enableInline"
+      [formControlName]="controlName!"
+      class="{{
+        (_form.controls[controlName].status | formStatus : 'INVALID') &&
+        (_form.controls[controlName].touched ||
+          _form.controls[controlName].dirty)
+          ? 'ng-invalid ng-dirty'
+          : ''
+      }}"
+    ></p-calendar>
+
+    <!-- Min Max mode -->
+    <p-calendar
+      [placeholder]="placeholder"
+      *ngSwitchCase="'min-max'"
+      [dateFormat]="dateFormat"
+      [styleClass]="styleClass"
+      [showIcon]="showCalendarIcon"
+      [readonlyInput]="readOnly"
+      [minDate]="minDate!"
+      [showButtonBar]="showButtons"
+      [maxDate]="maxDate!"
+      [showWeek]="showWeeks"
+      [inline]="enableInline"
+      [formControlName]="controlName!"
+      class="{{
+        (_form.controls[controlName].status | formStatus : 'INVALID') &&
+        (_form.controls[controlName].touched ||
+          _form.controls[controlName].dirty)
+          ? 'ng-invalid ng-dirty'
+          : ''
+      }}"
+    ></p-calendar>
+
+    <!-- Range mode -->
+    <p-calendar
+      [placeholder]="placeholder"
+      *ngSwitchCase="'range'"
+      [dateFormat]="dateFormat"
+      [styleClass]="styleClass"
+      [showIcon]="showCalendarIcon"
+      [showButtonBar]="showButtons"
+      [readonlyInput]="readOnly"
+      selectionMode="range"
+      [showWeek]="showWeeks"
+      [inline]="enableInline"
+      [formControlName]="controlName!"
+      class="{{
+        (_form.controls[controlName].status | formStatus : 'INVALID') &&
+        (_form.controls[controlName].touched ||
+          _form.controls[controlName].dirty)
+          ? 'ng-invalid ng-dirty'
+          : ''
+      }}"
+    ></p-calendar>
+
+    <!-- Month mode -->
+    <p-calendar
+      [placeholder]="placeholder"
+      *ngSwitchCase="'month'"
+      view="month"
+      dateFormat="mm/yy"
+      [styleClass]="styleClass"
+      [showIcon]="showCalendarIcon"
+      [readonlyInput]="readOnly"
+      [inline]="enableInline"
+      [formControlName]="controlName!"
+      class="{{
+        (_form.controls[controlName].status | formStatus : 'INVALID') &&
+        (_form.controls[controlName].touched ||
+          _form.controls[controlName].dirty)
+          ? 'ng-invalid ng-dirty'
+          : ''
+      }}"
+    ></p-calendar>
+
+    <!-- Year mode -->
+    <p-calendar
+      [placeholder]="placeholder"
+      *ngSwitchCase="'year'"
+      view="year"
+      dateFormat="yy"
+      [styleClass]="styleClass"
+      [showIcon]="showCalendarIcon"
+      [readonlyInput]="readOnly"
+      [inline]="enableInline"
+      [formControlName]="controlName!"
+      class="{{
+        (_form.controls[controlName].status | formStatus : 'INVALID') &&
+        (_form.controls[controlName].touched ||
+          _form.controls[controlName].dirty)
+          ? 'ng-invalid ng-dirty'
+          : ''
+      }}"
+    ></p-calendar>
+
+    <!-- Time mode -->
+    <p-calendar
+      [placeholder]="placeholder"
+      *ngSwitchCase="'time'"
+      [styleClass]="styleClass"
+      [timeOnly]="true"
+      [hourFormat]="timeFormat"
+      [inline]="enableInline"
+      [formControlName]="controlName!"
+      [readonlyInput]="readOnly"
+      class="{{
+        (_form.controls[controlName].status | formStatus : 'INVALID') &&
+        (_form.controls[controlName].touched ||
+          _form.controls[controlName].dirty)
+          ? 'ng-invalid ng-dirty'
+          : ''
+      }}"
+    ></p-calendar>
+
+    <!-- Date time mode -->
+    <p-calendar
+      [placeholder]="placeholder"
+      *ngSwitchCase="'date-time'"
+      [dateFormat]="dateFormat"
+      [styleClass]="styleClass"
+      [showIcon]="showCalendarIcon"
+      [readonlyInput]="readOnly"
+      [showButtonBar]="showButtons"
+      [showWeek]="showWeeks"
+      [inline]="enableInline"
+      [showTime]="true"
+      [showSeconds]="true"
+      [formControlName]="controlName!"
+      [hourFormat]="timeFormat"
+      class="{{
+        (_form.controls[controlName].status | formStatus : 'INVALID') &&
+        (_form.controls[controlName].touched ||
+          _form.controls[controlName].dirty)
+          ? 'ng-invalid ng-dirty'
+          : ''
+      }}"
+    ></p-calendar>
+  </ng-container>
+</ng-template>
+
+<!-- Formcontrol validations -->
+<ng-container
+  *ngIf="
+    controlErrors &&
+    !_form.controls[controlName].valid &&
+    (_form.controls[controlName].touched || _form.controls[controlName].dirty)
+  "
+>
+  <!-- https://github.com/angular/angular/issues/46867 -->
+  <ng-container *ngFor="let errorKey of _errorKeys">
+    <p *ngIf="_form.controls[controlName]?.errors?.[errorKey]" class="error">
+      {{ controlErrors[errorKey] }}
+    </p></ng-container
+  >
+</ng-container>

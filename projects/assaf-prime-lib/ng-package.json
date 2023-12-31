@@ -3,5 +3,7 @@
   "dest": "../../dist/assaf-prime-lib",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "allowedNonPeerDependencies": ["primeicons", "primeng"],
+  "assets": ["./README.md", "./LICENSE"]
 }

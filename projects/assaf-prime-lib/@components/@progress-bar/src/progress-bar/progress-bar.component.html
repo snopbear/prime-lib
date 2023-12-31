@@ -1,0 +1,27 @@
+<!-- Basic progress -->
+<p-progressBar
+  *ngIf="!workWithInterceptor"
+  [value]="value"
+  [color]="backgroundColor"
+  [mode]="mode"
+  [showValue]="showValue"
+  [styleClass]="styleClass"
+  [unit]="unit"
+  [style]="{ height: height }"
+></p-progressBar>
+
+<!-- Progress based on interceptor -->
+<div
+  class="progress-intercept {{ containerStyleClass! }}"
+  *ngIf="workWithInterceptor"
+>
+  <p-progressBar
+    [value]="value"
+    [color]="backgroundColor"
+    [mode]="mode"
+    [showValue]="showValue"
+    styleClass="progress-intercept__progress {{ styleClass }}"
+    [unit]="unit"
+    [style]="{ height: height }"
+  ></p-progressBar>
+</div>

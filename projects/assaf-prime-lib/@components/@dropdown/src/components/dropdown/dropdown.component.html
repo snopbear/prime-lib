@@ -1,0 +1,189 @@
+<!-- Dropdown with floating label -->
+<ng-template [ngIf]="floatLabel" [ngIfElse]="elseBlock">
+  <span class="p-float-label">
+    <ng-container *ngTemplateOutlet="dropdown"></ng-container>
+    <label *ngIf="label" class="{{ labelClass! }}">{{ label }}</label>
+  </span>
+</ng-template>
+
+<!-- Dropdown without floating label -->
+<ng-template #elseBlock>
+  <label *ngIf="label" class="{{ labelClass! }}">{{ label }}</label>
+  <ng-container *ngTemplateOutlet="dropdown"></ng-container>
+</ng-template>
+
+<!-- Dropdown template -->
+<ng-template #dropdown>
+  <!-- Single selection mode (normal dropdown) -->
+  <ng-template [formGroup]="_form" [ngIf]="!multiSelect" [ngIfElse]="elseBlock">
+    <!-- Without auto complete -->
+    <p-dropdown
+      [emptyMessage]="emptyMessage"
+      [emptyFilterMessage]="emptyFilterMessage"
+      *ngIf="!autoComplete"
+      [autoDisplayFirst]="autoDisplayFirst"
+      (onChange)="changed($event)"
+      [formControlName]="controlName"
+      [options]="data"
+      [styleClass]="styleClass"
+      [showClear]="showClear"
+      [placeholder]="placeholder"
+      filterBy="key"
+      [filter]="enableFilter"
+      optionLabel="key"
+      optionValue="value"
+      class="{{
+        (_form.controls[controlName].status | formStatus : 'INVALID') &&
+        (_form.controls[controlName].touched ||
+          _form.controls[controlName].dirty)
+          ? 'ng-invalid ng-dirty'
+          : ''
+      }}"
+    >
+      <!-- Selected item styling -->
+      <ng-template pTemplate="selectedItem">
+        <ng-template [ngIf]="_selectedItem" [ngSwitch]="mode">
+          <!-- Default mode (text mode) -->
+          <div *ngSwitchDefault>{{ _selectedItem.key }}</div>
+          <!-- Text with icon mode -->
+          <div *ngSwitchCase="'text-icon'">
+            <span [class]="_selectedItem.iconName"></span>
+            <span>{{ _selectedItem.key }}</span>
+          </div>
+          <!-- Text with svg mode -->
+          <div *ngSwitchCase="'text-svg'">
+            <img [alt]="_selectedItem.key" [src]="_selectedItem.iconURL" />
+            <span>{{ _selectedItem.key }}</span>
+          </div>
+          <!-- Text with flag mode -->
+          <div *ngSwitchCase="'text-flag'">
+            <span
+              class="fi fi-{{ _selectedItem.key | getFlag }} {{
+                roundedFlagIcon ? 'rounded fis' : ''
+              }}"
+            ></span>
+            <span>{{ _selectedItem.key }}</span>
+          </div>
+        </ng-template>
+      </ng-template>
+      <!-- Dropdown list -->
+      <ng-template pTemplate="item" let-listItem>
+        <assaf-dropdown-list
+          [mode]="mode"
+          [listItem]="listItem"
+          [class]="roundedFlagIcon ? 'rounded fis' : ''"
+        ></assaf-dropdown-list>
+      </ng-template>
+    </p-dropdown>
+
+    <!-- With auto complete -->
+    <p-autoComplete
+      (onSelect)="changed($event)"
+      [emptyMessage]="emptyMessage"
+      [styleClass]="styleClass"
+      *ngIf="autoComplete"
+      [formControlName]="controlName"
+      [dropdown]="true"
+      [suggestions]="_filteredResults"
+      (completeMethod)="search($event)"
+      [multiple]="_multiAutoComplete"
+      field="key"
+      [placeholder]="placeholder"
+      class="{{
+        (_form.controls[controlName].status | formStatus : 'INVALID') &&
+        (_form.controls[controlName].touched ||
+          _form.controls[controlName].dirty)
+          ? 'ng-invalid ng-dirty'
+          : ''
+      }}"
+    >
+      <!-- Dropdown list -->
+      <ng-template pTemplate="item" let-listItem>
+        <assaf-dropdown-list
+          [mode]="mode"
+          [listItem]="listItem"
+          [class]="roundedFlagIcon ? 'rounded fis' : ''"
+        ></assaf-dropdown-list> </ng-template
+    ></p-autoComplete>
+  </ng-template>
+
+  <!-- Multi select mode (dropdown with multi select) -->
+  <ng-template #elseBlock [formGroup]="_form" [ngSwitch]="multiSelectMode">
+    <!-- Default mode -->
+    <p-multiSelect
+      (onChange)="changed($event)"
+      [emptyMessage]="emptyMessage"
+      [emptyFilterMessage]="emptyFilterMessage"
+      [styleClass]="styleClass"
+      [options]="data"
+      optionLabel="key"
+      optionValue="value"
+      [formControlName]="controlName"
+      [placeholder]="placeholder"
+      *ngSwitchDefault
+      class="{{
+        (_form.controls[controlName].status | formStatus : 'INVALID') &&
+        (_form.controls[controlName].touched ||
+          _form.controls[controlName].dirty)
+          ? 'ng-invalid ng-dirty'
+          : ''
+      }}"
+    >
+      <!-- Dropdown list -->
+      <ng-template pTemplate="item" let-listItem>
+        <assaf-dropdown-list
+          [mode]="mode"
+          [listItem]="listItem"
+          [class]="roundedFlagIcon ? 'rounded fis' : ''"
+        ></assaf-dropdown-list>
+      </ng-template>
+    </p-multiSelect>
+
+    <!-- Chip mode -->
+    <p-multiSelect
+      (onChange)="changed($event)"
+      [emptyMessage]="emptyMessage"
+      [emptyFilterMessage]="emptyFilterMessage"
+      [options]="data"
+      [styleClass]="styleClass"
+      optionLabel="key"
+      optionValue="value"
+      [formControlName]="controlName"
+      [placeholder]="placeholder"
+      *ngSwitchCase="'chip'"
+      display="chip"
+      class="{{
+        (_form.controls[controlName].status | formStatus : 'INVALID') &&
+        (_form.controls[controlName].touched ||
+          _form.controls[controlName].dirty)
+          ? 'ng-invalid ng-dirty'
+          : ''
+      }}"
+    >
+      <!-- Dropdown list -->
+      <ng-template pTemplate="item" let-listItem>
+        <assaf-dropdown-list
+          [mode]="mode"
+          [listItem]="listItem"
+          [class]="roundedFlagIcon ? 'rounded fis' : ''"
+        ></assaf-dropdown-list>
+      </ng-template>
+    </p-multiSelect>
+  </ng-template>
+</ng-template>
+
+<!-- Formcontrol validations -->
+<ng-container
+  *ngIf="
+    controlErrors &&
+    !_form.controls[controlName].valid &&
+    (_form.controls[controlName].touched || _form.controls[controlName].dirty)
+  "
+>
+  <!-- https://github.com/angular/angular/issues/46867 -->
+  <ng-container *ngFor="let errorKey of _errorKeys">
+    <p *ngIf="_form.controls[controlName]?.errors?.[errorKey]" class="error">
+      {{ controlErrors[errorKey] }}
+    </p>
+  </ng-container>
+</ng-container>
