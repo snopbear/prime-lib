@@ -21,7 +21,7 @@ import { DataService } from '../../services/data.service';
 import { Size } from 'assaf-prime-lib/models';
 
 @Component({
-  selector: 'Assaf-data-table',
+  selector: 'assaf-data-table',
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.scss'],
   providers: [DataService],

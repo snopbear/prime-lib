@@ -38,6 +38,27 @@
     <ng-content  select="[assaf]"></ng-content>
   </span>
 
+
+    <!-- Outlined button -->
+  <p-button
+    [disabled]="disabled"
+    *ngSwitchCase="'outlined'"
+    [label]="label"
+    icon="{{ btnIcon ? 'pi ' + btnIcon : '' }}"
+    [type]="btnType"
+    [outlined]="isOutlined"
+    styleClass="p-button-{{ severity }} {{
+      isRounded ? 'p-button-rounded' : ''
+    }} {{ isText ? 'p-button-text' : '' }} {{
+      isRaised ? 'p-button-raised' : ''
+    }} {{ isOutline ? 'p-button-outlined' : '' }} p-button-{{ size }} {{
+      styleClass!
+    }} {{ isLink ? 'p-button-link' : '' }}"
+    [iconPos]="iconPos"
+  ></p-button>
+
+
+
   <!-- Custom button content mode -->
   <p-button
     [disabled]="disabled"

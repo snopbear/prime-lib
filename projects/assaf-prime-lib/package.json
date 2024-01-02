@@ -1,7 +1,7 @@
 {
   "name": "assaf-prime-lib",
-  "description": "cic-core-library is a comprehensive library of ready-to-use Angular components, services, pipes, and resolvers. It provides developers with a set of pre-built building blocks that can be easily integrated into their Angular applications, saving time and effort. With cic-core-library, developers can quickly add essential functionality to their projects without having to start from scratch.",
-  "version": "0.0.4",
+  "description": "",
+  "version": "0.0.7",
   "peerDependencies": {
     "@angular/common": "^16.2.0",
     "@angular/core": "^16.2.0",
@@ -14,10 +14,6 @@
     "tslib": "^2.3.0",
     "primeicons": "^6.0.1",
     "primeng": "^16.9.1"
-  },
-  "author": {
-    "name": "Mohammed Mahmoud Assaf",
-    "email": "snopbear@gmail.com"
   },
   "keywords": [
     "prime prime-Assaf Assaf snopbear Mohammed"

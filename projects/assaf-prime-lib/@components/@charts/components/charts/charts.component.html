@@ -1,0 +1,351 @@
+<ng-container [ngSwitch]="mode">
+  <!-- Bar vertical -->
+  <ngx-charts-bar-vertical
+    *ngSwitchDefault
+    [view]="chartDimensions"
+    [results]="chartData"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [legendTitle]="legendTitle"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [gradient]="gradient"
+    [scheme]="colorScheme"
+    [legendPosition]="_below"
+  >
+  </ngx-charts-bar-vertical>
+
+  <!-- Grouped vertical -->
+  <ngx-charts-bar-vertical-2d
+    *ngSwitchCase="'bar-vertical-2d'"
+    [view]="chartDimensions"
+    [scheme]="colorScheme"
+    [results]="chartData"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [legendTitle]="legendTitle"
+  >
+  </ngx-charts-bar-vertical-2d>
+
+  <!-- Grouped Horizontal -->
+  <ngx-charts-bar-horizontal-2d
+    *ngSwitchCase="'bar-horizontal-2d'"
+    [view]="chartDimensions"
+    [scheme]="colorScheme"
+    [schemeType]="schemeType"
+    [results]="chartData"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [legendPosition]="_below"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+  >
+  </ngx-charts-bar-horizontal-2d>
+
+  <!-- Bar horizontal -->
+  <ngx-charts-bar-horizontal
+    *ngSwitchCase="'bar-horizontal'"
+    [view]="chartDimensions"
+    [scheme]="colorScheme"
+    [results]="chartData"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+  >
+  </ngx-charts-bar-horizontal>
+
+  <!-- Horizontal normalized bar -->
+  <ngx-charts-bar-horizontal-normalized
+    *ngSwitchCase="'horizontal-normalized'"
+    [view]="chartDimensions"
+    [scheme]="colorScheme"
+    [results]="chartData"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+  >
+  </ngx-charts-bar-horizontal-normalized>
+
+  <!-- Normalized Vertical bar -->
+  <ngx-charts-bar-vertical-normalized
+    *ngSwitchCase="'vertical-normalized'"
+    [view]="chartDimensions"
+    [scheme]="colorScheme"
+    [results]="chartData"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+  >
+  </ngx-charts-bar-vertical-normalized>
+
+  <!-- Stacked Horizontal bar  -->
+  <ngx-charts-bar-horizontal-stacked
+    *ngSwitchCase="'horizontal-stacked'"
+    [view]="chartDimensions"
+    [scheme]="colorScheme"
+    [results]="chartData"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+  >
+  </ngx-charts-bar-horizontal-stacked>
+
+  <!-- Stacked Vertical bar  -->
+  <ngx-charts-bar-vertical-stacked
+    *ngSwitchCase="'vertical-stacked'"
+    [view]="chartDimensions"
+    [scheme]="colorScheme"
+    [results]="chartData"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [animations]="animations"
+  >
+  </ngx-charts-bar-vertical-stacked>
+
+  <!-- pie-chart -->
+  <ngx-charts-pie-chart
+    *ngSwitchCase="'pie-chart'"
+    [results]="chartData"
+    [legend]="showLegend"
+    [legendTitle]="legendTitle"
+    [view]="chartDimensions"
+    [gradient]="gradient"
+    [scheme]="colorScheme"
+    [gradient]="gradient"
+    [legend]="showLegend"
+    [legendPosition]="_below"
+    [doughnut]="isDoughnut"
+    [labels]="showLabels"
+    [scheme]="colorScheme"
+  >
+  </ngx-charts-pie-chart>
+
+  <!-- advanced-pie-chart -->
+  <ngx-charts-advanced-pie-chart
+    *ngSwitchCase="'advanced-pie-chart'"
+    [results]="chartData"
+    [gradient]="gradient"
+    [view]="chartDimensions"
+    [scheme]="colorScheme"
+    class="charts-container"
+  >
+  </ngx-charts-advanced-pie-chart>
+
+  <!-- pie-grid -->
+  <ngx-charts-pie-grid
+    *ngSwitchCase="'pie-grid'"
+    [results]="chartData"
+    [view]="chartDimensions"
+    [scheme]="colorScheme"
+  >
+  </ngx-charts-pie-grid>
+
+  <!-- Gauge Chart -->
+  <ngx-charts-gauge
+    *ngSwitchCase="'gauge'"
+    [view]="chartDimensions"
+    [scheme]="colorScheme"
+    [results]="chartData"
+    [legend]="showLegend"
+    [legendPosition]="_below"
+  >
+  </ngx-charts-gauge>
+
+  <!-- Heat map -->
+  <ngx-charts-heat-map
+    *ngSwitchCase="'heat-map'"
+    [view]="chartDimensions"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [results]="chartData"
+    [scheme]="colorScheme"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+  >
+  </ngx-charts-heat-map>
+
+  <!-- Linear gauage -->
+  <ngx-charts-linear-gauge
+    *ngSwitchCase="'linear-gauge'"
+    [view]="chartDimensions"
+    [scheme]="colorScheme"
+    [value]="value"
+    [previousValue]="previousValue"
+    [units]="xAxisLabel"
+  >
+  </ngx-charts-linear-gauge>
+
+  <!-- Polar chart -->
+  <ngx-charts-polar-chart
+    *ngSwitchCase="'pola'"
+    [view]="chartDimensions"
+    [scheme]="colorScheme"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [legendPosition]="_below"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [results]="chartData"
+  >
+  </ngx-charts-polar-chart>
+
+  <!-- Tree Map -->
+  <ngx-charts-tree-map
+    *ngSwitchCase="'tree-map'"
+    [view]="chartDimensions"
+    [scheme]="colorScheme"
+    [results]="chartData"
+    [gradient]="gradient"
+    [animations]="animations"
+    [labelFormatting]="labelFormatting"
+  >
+  </ngx-charts-tree-map>
+
+  <!-- Number Card -->
+  <ngx-charts-number-card
+    *ngSwitchCase="'number-card'"
+    [view]="chartDimensions"
+    [scheme]="colorScheme"
+    [animations]="animations"
+    [textColor]="textColor"
+    [results]="chartData"
+    [cardColor]="cardColor"
+  >
+  </ngx-charts-number-card>
+
+  <!-- Area Chart -->
+  <ngx-charts-area-chart
+    *ngSwitchCase="'area-char'"
+    [view]="chartDimensions"
+    [scheme]="colorScheme"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [timeline]="timeline"
+    [results]="chartData"
+  >
+  </ngx-charts-area-chart>
+
+  <!-- Normalized Area -->
+  <ngx-charts-area-chart-normalized
+    *ngSwitchCase="'area-chart-normalized'"
+    [view]="chartDimensions"
+    [scheme]="colorScheme"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [timeline]="timeline"
+    [results]="chartData"
+  >
+  </ngx-charts-area-chart-normalized>
+
+  <!-- Stacked Area -->
+  <ngx-charts-area-chart-stacked
+    *ngSwitchCase="'area-chart-stacked'"
+    [view]="chartDimensions"
+    [scheme]="colorScheme"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [timeline]="timeline"
+    [results]="chartData"
+  >
+  </ngx-charts-area-chart-stacked>
+
+  <!-- Line Chart-->
+  <ngx-charts-line-chart
+    *ngSwitchCase="'line-chart'"
+    [view]="chartDimensions"
+    [scheme]="colorScheme"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [curve]="linearCurve"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [timeline]="timeline"
+    [results]="chartData"
+  >
+  </ngx-charts-line-chart>
+
+  <!-- Bubble chart -->
+  <ngx-charts-bubble-chart
+    *ngSwitchCase="'bubble-chart'"
+    [view]="chartDimensions"
+    [scheme]="colorScheme"
+    [results]="chartData"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [xScaleMin]="xScaleMin"
+    [xScaleMax]="xScaleMax"
+    [yScaleMin]="yScaleMin"
+    [yScaleMax]="yScaleMax"
+    [minRadius]="minRadius"
+    [maxRadius]="maxRadius"
+  >
+  </ngx-charts-bubble-chart>
+</ng-container>

@@ -57,6 +57,13 @@ export class AssafButtonComponent {
    * @default false
    */
   @Input() isOutline: boolean = false;
+
+  /**
+   * Sets button shape to outlined V.16
+   * @type boolean
+   * @default false
+   */
+  @Input() isOutlined: boolean = true;
   /**
    * Sets button text
    * @type string
